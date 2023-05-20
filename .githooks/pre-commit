@@ -1,0 +1,24 @@
+#!/bin/bash
+# Git hook for checking code
+
+echo "Running Pycodestyle and Pycodestyle"
+
+# Run pycodestyle style checker with config file setup.cfg
+pycodestyle --config=${PWD}/conf/setup.cfg ${PWD}
+
+# If there were errors, return non-zero exit code
+if [ $? -ne 0 ]; then
+  echo "pycodestyle failed. Please fix the errors and try again."
+  exit 1
+fi
+
+# Run pydocstyle style checker with config file setup.cfg
+pydocstyle --config=${PWD}/conf/setup.cfg ${PWD}
+
+# If there were errors, return non-zero exit code
+if [ $? -ne 0 ]; then
+  echo "pydocstyle failed. Please fix the errors and try again."
+  exit 1
+fi
+
+
